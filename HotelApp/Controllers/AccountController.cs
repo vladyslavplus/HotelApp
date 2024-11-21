@@ -8,5 +8,9 @@ namespace HotelApp.Controllers
         {
             return View();
         }
+        public IActionResult Register()
+        {
+            return View();
+        }
     }
 }

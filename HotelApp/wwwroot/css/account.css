@@ -1,5 +1,9 @@
-﻿.account-container {
-    background-image:url('../images/officeWork.jpg');
+﻿html {
+    overflow-y: scroll;
+}
+
+.account-container {
+    background-image: url('../images/officeWork.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: repeat-y;
