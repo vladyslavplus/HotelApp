@@ -16,5 +16,9 @@ namespace HotelApp.Controllers
         {
             return View();
         }
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
     }
 }
