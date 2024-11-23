@@ -1,0 +1,44 @@
+﻿@model IEnumerable<HotelApp.Models.Booking>
+
+@{
+    ViewData["Title"] = "Bookings List";
+}
+
+<h1>Bookings for Hotel</h1>
+
+@if (!Model.Any())
+{
+    <p>No bookings found for this hotel.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Hotel Name</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>No. of Adults</th>
+                <th>No. of Children</th>
+                <th>Suite Type</th>
+                <th>Cuisine</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.Id</td>
+                    <td>@booking.Hotel?.Name</td>
+                    <td>@booking.CheckIn.ToShortDateString()</td>
+                    <td>@booking.CheckOut.ToShortDateString()</td>
+                    <td>@booking.NoOfAdults</td>
+                    <td>@booking.NoOfChildren</td>
+                    <td>@booking.Suite</td>
+                    <td>@booking.Cuisine</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Hotel>
+
+@{
+    ViewData["Title"] = "Booking";
+    Layout = "~/Views/Shared/_BookingLayout.cshtml";
+}
+
+<div class="container text-center">
+    <h1 class="my-5 custom-header">Choose a Hotel</h1>
+
+    <div class="row justify-content-center">
+        @foreach (var hotel in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="hotel-card shadow-sm rounded">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@hotel.Name</h5>
+                        <form asp-action="Details" asp-controller="Booking" method="get" style="display:inline;">
+                            <input type="hidden" name="hotelId" value="@hotel.Id" />
+                            <button type="submit" class="btn btn-lg btn-primary">Book Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

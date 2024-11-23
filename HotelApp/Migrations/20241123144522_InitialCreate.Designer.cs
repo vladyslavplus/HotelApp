@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelApp.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    [Migration("20241121131200_InitialCreate")]
+    [Migration("20241123144522_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,115 @@ namespace HotelApp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("HotelApp.Models.Booking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CheckIn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckOut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Cuisine")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoOfAdults")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoOfChildren")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Suite")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HotelId");
+
+                    b.ToTable("Bookings");
+                });
+
+            modelBuilder.Entity("HotelApp.Models.Hotel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Stars")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hotels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "123 Paradise Rd, Tropical City",
+                            Description = "A luxury hotel offering the ultimate comfort and breathtaking views.",
+                            Name = "Hotel Paradise",
+                            Stars = 5
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "456 Ocean Ave, Coastal Town",
+                            Description = "Enjoy your stay with ocean views and a relaxing atmosphere.",
+                            Name = "Ocean View Resort",
+                            Stars = 4
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "789 Summit St, Alpine Village",
+                            Description = "A cozy retreat surrounded by stunning mountain scenery.",
+                            Name = "Mountain Retreat",
+                            Stars = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "321 Downtown Blvd, Metropolis",
+                            Description = "Stay in the heart of the city and enjoy modern amenities.",
+                            Name = "City Lights Hotel",
+                            Stars = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "654 Sand Dunes Rd, Desert Haven",
+                            Description = "A peaceful inn surrounded by serene desert landscapes.",
+                            Name = "Desert Oasis Inn",
+                            Stars = 3
+                        });
+                });
 
             modelBuilder.Entity("HotelApp.Models.Users", b =>
                 {
@@ -227,6 +336,17 @@ namespace HotelApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HotelApp.Models.Booking", b =>
+                {
+                    b.HasOne("HotelApp.Models.Hotel", "Hotel")
+                        .WithMany("Bookings")
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hotel");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -276,6 +396,11 @@ namespace HotelApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HotelApp.Models.Hotel", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

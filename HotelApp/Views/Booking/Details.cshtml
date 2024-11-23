@@ -1,0 +1,71 @@
+﻿@model HotelApp.Models.Booking
+
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="custom-header">@ViewData["Title"]</h2>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <form asp-action="Details" method="post" class="form-horizontal bg-light p-4 rounded shadow-sm">
+        <input asp-for="HotelId" type="hidden" />
+
+        <div class="mb-3">
+            <label asp-for="NoOfAdults" class="form-label"></label>
+            <input asp-for="NoOfAdults" class="form-control" />
+            <span asp-validation-for="NoOfAdults" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="NoOfChildren" class="form-label"></label>
+            <input asp-for="NoOfChildren" class="form-control" />
+            <span asp-validation-for="NoOfChildren" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Suite" class="form-label"></label>
+            <select asp-for="Suite" asp-items="Html.GetEnumSelectList<SuiteType>()" class="form-select"></select>
+            <span asp-validation-for="Suite" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CheckIn" class="form-label"></label>
+            <input asp-for="CheckIn" type="date" class="form-control" />
+            <span asp-validation-for="CheckIn" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CheckOut" class="form-label"></label>
+            <input asp-for="CheckOut" type="date" class="form-control" />
+            <span asp-validation-for="CheckOut" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Cuisine" class="form-label"></label>
+            <select asp-for="Cuisine" asp-items="Html.GetEnumSelectList<CuisineType>()" class="form-select"></select>
+            <span asp-validation-for="Cuisine" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
