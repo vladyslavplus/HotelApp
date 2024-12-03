@@ -17,7 +17,7 @@ namespace HotelApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
             modelBuilder.Entity<Hotel>().HasData(
                 new Hotel
                 {
@@ -60,6 +60,7 @@ namespace HotelApp.Data
                     Description = "A peaceful inn surrounded by serene desert landscapes."
                 }
             );
+            
         }
-    } 
+    }
 }

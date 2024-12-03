@@ -1,0 +1,53 @@
+﻿@model HotelApp.Models.Booking
+
+@{
+    ViewData["Title"] = "Delete Booking";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="custom-header">@ViewData["Title"]</h2>
+        <p class="text-danger">Are you sure you want to delete this booking? This action cannot be undone.</p>
+    </div>
+
+    <form asp-action="DeletePOST" method="post" class="form-horizontal bg-light p-4 rounded shadow-sm">
+        <input asp-for="Id" type="hidden" />
+        <input asp-for="HotelId" type="hidden" />
+        <input asp-for="UserId" type="hidden" />
+
+        <div class="mb-3">
+            <label asp-for="NoOfAdults" class="form-label">Number of Adults</label>
+            <input asp-for="NoOfAdults" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="NoOfChildren" class="form-label">Number of Children</label>
+            <input asp-for="NoOfChildren" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Suite" class="form-label">Suite Type</label>
+            <input asp-for="Suite" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CheckIn" class="form-label">Check-in Date</label>
+            <input asp-for="CheckIn" type="date" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CheckOut" class="form-label">Check-out Date</label>
+            <input asp-for="CheckOut" type="date" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Cuisine" class="form-label">Preferred Cuisine</label>
+            <input asp-for="Cuisine" class="form-control" readonly />
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Info" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,170 @@
+﻿/* Загальний контейнер */
+.profile-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: transparent; 
+    padding-top: 50px;
+    margin: 0;
+}
+
+
+/* Карточка профілю */
+.profile-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    border: 1px solid #e0e0e0;
+}
+
+/* Заголовок */
+.profile-header h1 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/* Контент профілю */
+.profile-body {
+    padding: 20px 0 10px;
+}
+
+/* Стиль для кожної властивості профілю */
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+    /* Видаляємо лінію знизу під останнім елементом (Phone) */
+    .profile-row:last-child {
+        border-bottom: none;
+    }
+
+.profile-label {
+    font-weight: 600;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.profile-value {
+    color: #333;
+    font-size: 1.1rem;
+}
+
+/* Футер з кнопками */
+.profile-footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #e0e0e0; /* Тільки одна лінія під блоком */
+}
+
+/* Кнопки */
+.profile-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+    .profile-btn.primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+        .profile-btn.primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+    .profile-btn.secondary {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+        .profile-btn.secondary:hover {
+            background-color: #a71d2a;
+            transform: translateY(-2px);
+        }
+
+/* Секція для аватарки */
+.profile-avatar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.avatar-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #e0e0e0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Секція для завантаження аватарки */
+.profile-avatar-upload {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.upload-input {
+    display: none;
+}
+
+.upload-btn {
+    background-color: #28a745;
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+    .upload-btn:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+    }
+
+.delete-avatar-btn {
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s, transform: 0.2s;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+    .delete-avatar-btn:hover {
+        background-color: #a71d2a;
+        transform: translateY(-2px);
+    }

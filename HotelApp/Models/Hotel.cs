@@ -19,7 +19,6 @@ namespace HotelApp.Models
 
         [MaxLength(500)]
         public string Description { get; set; } = null!;
-
         public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
     }
 }

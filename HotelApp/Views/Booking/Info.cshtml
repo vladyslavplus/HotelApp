@@ -4,16 +4,16 @@
     ViewData["Title"] = "Bookings List";
 }
 
-<h1>Bookings for Hotel</h1>
+<h1 class="text-primary">Bookings for Hotel</h1>
 
 @if (!Model.Any())
 {
-    <p>No bookings found for this hotel.</p>
+    <p class="text-warning">No bookings found for your account.</p>
 }
 else
 {
-    <table class="table">
-        <thead>
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
             <tr>
                 <th>Booking ID</th>
                 <th>Hotel Name</th>
@@ -23,6 +23,7 @@ else
                 <th>No. of Children</th>
                 <th>Suite Type</th>
                 <th>Cuisine</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,12 @@ else
                     <td>@booking.NoOfChildren</td>
                     <td>@booking.Suite</td>
                     <td>@booking.Cuisine</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@booking.Id" class="btn btn-sm btn-primary">Edit</a>
+                        <form asp-action="Delete" asp-route-id="@booking.Id" method="get" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>

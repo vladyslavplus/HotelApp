@@ -13,11 +13,13 @@ namespace HotelApp.Controllers
     {
         private readonly SignInManager<Users> signInManager;
         private readonly UserManager<Users> userManager;
+        private readonly IWebHostEnvironment environment;
 
-        public AccountController(SignInManager<Users> signInManager, UserManager<Users> userManager)
+        public AccountController(SignInManager<Users> signInManager, UserManager<Users> userManager, IWebHostEnvironment environment)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.environment = environment;
         }
 
         public IActionResult Login()
@@ -149,19 +151,49 @@ namespace HotelApp.Controllers
         {
             var user = await userManager.GetUserAsync(User);
 
-            if(user == null)
+            if (user == null)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            var model = new ProfileViewModel
-            {
-                FullName = user.FullName,
-                Phone = user.Phone
-            };
-
-            return View(model);
+            return View(user);
         }
+        [HttpPost]
+        public async Task<IActionResult> UploadAvatar(IFormFile avatar)
+        {
+            if (avatar != null && avatar.Length > 0)
+            {
+                var user = await userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(avatar.FileName)}";
+                var filePath = Path.Combine(uploadPath, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await avatar.CopyToAsync(stream);
+                }
+
+                user.AvatarPath = $"/images/{fileName}";
+                await userManager.UpdateAsync(user);
+            }
+
+            return RedirectToAction("Profile");
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteAvatar()
+        {
+            var user = await userManager.GetUserAsync(User);
+            user.AvatarPath = null; 
+            await userManager.UpdateAsync(user); 
+
+            return RedirectToAction("Profile"); 
+        }
+
         [Authorize]
         public async Task<IActionResult> Logout()
         {

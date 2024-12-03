@@ -8,5 +8,7 @@ namespace HotelApp.Models
         public string FullName { get; set; } = null!;
         [Phone]
         public string? Phone { get; set; }
+        public string? AvatarPath { get; set; }
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
     }
 }

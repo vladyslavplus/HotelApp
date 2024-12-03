@@ -1,0 +1,62 @@
+﻿@model HotelApp.Models.Users
+
+@{
+    ViewData["Title"] = "User Profile";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+
+<div class="profile-wrapper">
+    <div class="profile-card">
+        <div class="profile-header">
+            <h1>User Profile</h1>
+        </div>
+        <div class="profile-body">
+            <!-- Avatar Section -->
+            <div class="profile-avatar">
+                <img src="@Url.Content(Model.AvatarPath ?? "https://tartutennis.ee/wp-content/uploads/2021/12/Profile-pic.jpg")" alt="User Avatar" class="avatar-img" />
+            </div>
+
+            <!-- Buttons for Avatar -->
+            <div class="profile-avatar-upload">
+                <!-- Hidden file input -->
+                <form asp-action="UploadAvatar" asp-controller="Account" method="post" enctype="multipart/form-data" id="uploadForm">
+                    <input type="file" name="avatar" id="avatarInput" class="upload-input" onchange="uploadAvatar()" />
+                    <button type="button" class="profile-btn upload-btn" onclick="document.getElementById('avatarInput').click();">Upload</button>
+                </form>
+
+                <form asp-action="DeleteAvatar" asp-controller="Account" method="post">
+                    <button type="submit" class="profile-btn delete-avatar-btn">Delete Avatar</button>
+                </form>
+            </div>
+
+            <!-- User Info Section -->
+            <div class="profile-row">
+                <span class="profile-label">Name:</span>
+                <span class="profile-value">@Model.FullName</span>
+            </div>
+            <div class="profile-row">
+                <span class="profile-label">Email:</span>
+                <span class="profile-value">@Model.Email</span>
+            </div>
+            <div class="profile-row">
+                <span class="profile-label">Phone:</span>
+                <span class="profile-value">@(Model.Phone ?? "Not Provided")</span>
+            </div>
+        </div>
+        <div class="profile-footer">
+            <a class="profile-btn primary" asp-action="ChangePassword">Change Password</a>
+            <a class="profile-btn secondary" asp-action="Logout">Logout</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function uploadAvatar() {
+            const form = document.getElementById('uploadForm');
+            form.submit();
+        }
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}
+

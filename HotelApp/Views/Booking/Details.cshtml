@@ -21,8 +21,10 @@
         </div>
     }
 
+
     <form asp-action="Details" method="post" class="form-horizontal bg-light p-4 rounded shadow-sm">
         <input asp-for="HotelId" type="hidden" />
+        <input asp-for="UserId" type="hidden" />
 
         <div class="mb-3">
             <label asp-for="NoOfAdults" class="form-label"></label>
